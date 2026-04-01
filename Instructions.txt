@@ -1,0 +1,17 @@
+HOW TO RUN THIS PROJECT:
+
+1. Open 'index.html' in any modern web browser (Chrome, Safari, Firefox, Edge).
+2. You can do this by:
+   - Double-clicking the 'index.html' file in your file explorer.
+   - Right-clicking 'index.html' and selecting 'Open with...' then choosing your browser.
+   - Dragging and dropping the 'index.html' file into an open browser window.
+
+THEME TOGGLE:
+- Use the animated switch in the top-right corner to toggle between Light and Dark modes.
+- The state (Sun for Light, Moon for Dark) is animated and will persist even after you refresh the page.
+
+INTERACTIVE STAGE:
+- The background is a draggable infinite canvas.
+- Click and drag anywhere (or use touch) to explore the space.
+- Use the 'Recenter' button in the bottom-left to reset the view.
+- Hover your mouse to see the grid-reveal effect.
