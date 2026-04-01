@@ -1,0 +1,61 @@
+================================================================================
+INTERACTIVE PORTFOLIO: HYBRID SYSTEM ARCHITECTURE GUIDE
+================================================================================
+
+1. THE CURRENT SYSTEM (PURE VANILLA)
+------------------------------------
+Your project is built with a "Pure" foundation optimized for 60fps performance 
+and zero-latency interactivity (perfect for the "Infinite Canvas").
+
+- index.html   : The skeleton and layout (Viewport, Stage, Cards).
+- style.css    : The design system (No utility-framework overhead).
+- script.js     : The interactions (Dragging, Theme logic, Grid Reveal).
+- Vite         : The "Engine" that manages assets and performs the production build.
+
+2. ADDING MORE ENDPOINTS (ROUTING)
+----------------------------------
+As you scale to a "Very Big Website," you have two choices for routing:
+
+A. The MULTI-PAGE Approach (Traditional)
+   - Create a new file (e.g., `projects.html`).
+   - Link it in your navbar: `<a href="/projects.html">Projects</a>`.
+   - Result: A standard page refresh happens. Great for SEO and simplicity.
+
+B. The REACT ROUTER Approach (Professional SPA)
+   - Install React Router: `npm install react-router-dom`.
+   - Wrap your App in a `<Router>`.
+   - Result: Instant, "app-like" transitions between pages without a refresh.
+   - Best for: Moving from a portfolio to a complex web application.
+
+3. SCALING YOUR "BIG WEBSITE"
+-----------------------------
+To manage hundreds of projects or blog posts:
+- Do NOT create 100 HTML files.
+- DO create ONE React "Project Template" component.
+- Use a data source (JSON file or Database) to populate your templates.
+
+4. VITE PRODUCTION CONFIG (MULTI-PAGE)
+--------------------------------------
+If you use several .html files, tell Vite how to build them in `vite.config.js`:
+
+export default {
+  build: {
+    rollupOptions: {
+      input: {
+        main: './index.html',
+        projects: './projects.html',
+        about: './about.html'
+      }
+    }
+  }
+}
+
+5. KEY TIPS FOR YOUR PORTFOLIO
+------------------------------
+- SMOOTHNESS: Keep the Interactive Canvas as your Home Page using Pure JS.
+- DATA: Use React for the "Projects Gallery" and "Contact Form."
+- SYNC: Both Pure and React will read from the same `style.css` theme variables.
+
+================================================================================
+REFER TO THIS FILE WHENEVER YOU WANT TO SCALE OR ADD NEW FEATURES!
+================================================================================
