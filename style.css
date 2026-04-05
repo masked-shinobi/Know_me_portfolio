@@ -737,13 +737,15 @@ body.dark-mode #floating-menu a:hover {
     bottom: 50%;
     transform: translate(50%, 50%);
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    opacity: 0; /* Hidden by default */
+    pointer-events: none;
 }
 
-.social-logo .social-logo-svg {
-    fill: var(--text-color);
-    width: 32px;
-    height: 32px;
-    opacity: 0.8;
+.social-logo .social-logo-img {
+    width: 82px; /* Balanced size for better fit */
+    height: auto;
+    opacity: 0.95;
+    object-fit: contain;
 }
 
 .social-box a {
@@ -844,9 +846,11 @@ body.dark-mode #floating-menu a:hover {
 
 .social-card:hover .social-logo {
     transform: translate(0, 0);
-    bottom: 16px;
+    top: 16px;
     right: 16px;
+    bottom: auto;
     opacity: 1;
+    pointer-events: auto;
 }
 
 [data-theme="dark"] .social-box1:hover {
