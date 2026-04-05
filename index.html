@@ -8,31 +8,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css?v=10">
     <style>
-        /* Force Chat Card Styles - Overriding potential cache issues */
-        .chat-card {
-            width: 520px !important;
-            height: 380px !important;
-            position: relative !important;
-        }
-
-        .chat-character {
-            width: 460px !important;
-            position: absolute !important;
-            bottom: -60px !important;
-            left: -50px !important;
-            z-index: 5 !important;
-        }
-
-        .chat-bubble {
-            position: absolute !important;
-            left: 100px !important;
-            bottom: 220px !important;
-            z-index: 10 !important;
-        }
-
-        .chat-input-container {
-            z-index: 20 !important;
-        }
+        /* Modernized Chat Styles will be in style.css */
     </style>
 </head>
 
@@ -84,16 +60,19 @@
                         </svg>
                     </div>
                     <!-- Resume Card -->
-                    <div data-text="Resume" style="--r:5;" class="glass">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                            <line x1="16" y1="13" x2="8" y2="13"></line>
-                            <line x1="16" y1="17" x2="8" y2="17"></line>
-                            <line x1="10" y1="9" x2="8" y2="9"></line>
-                        </svg>
-                    </div>
+                    <a href="https://drive.google.com/file/d/1QGokMLQhPTLxFkUjbR9Es9ofhuaZsnsl/view?usp=drive_link"
+                        target="_blank" style="text-decoration: none;">
+                        <div data-text="Resume" style="--r:5;" class="glass">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <line x1="10" y1="9" x2="8" y2="9"></line>
+                            </svg>
+                        </div>
+                    </a>
                     <!-- Educational Journey Card -->
                     <div data-text="Education" style="--r:25;" class="glass">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -105,17 +84,22 @@
                 </div>
             </div>
 
-            <div class="card-container" style="left: 2300px; top: 1850px;">
-                <span class="card-label">CARD #04 &mdash; CHAT</span>
+            <div class="card-container" id="chat-card-container" style="left: 2300px; top: 1850px;">
+                <span class="card-label">CARD #04 &mdash; SANJAY AI</span>
                 <div class="chat-card">
+                    <!-- Mascot -->
+                    <img src="images/Chat-image.png" class="chat-character" alt="Sanjay AI">
+                    
                     <div class="chat-main">
-                        <img src="images/Chat-image.png" class="chat-character" alt="Character">
-                        <div class="chat-bubble">
-                            <p id="chat-text">wanna have a chat with me?</p>
+                        <!-- Single Response Bubble -->
+                        <div class="chat-bubble" id="chat-bubble">
+                            <p id="chat-text">Wanna have a chat with me? I'm Sanjay's AI double!</p>
                         </div>
                     </div>
+                    
                     <div class="chat-input-container">
-                        <input type="text" placeholder="Chat with him ?" class="chat-input-field" id="chat-input-field">
+                        <input type="text" placeholder="Ask me anything..." class="chat-input-field" id="chat-input-field">
+                        <div id="chat-typing-dot" class="chat-dot"></div>
                     </div>
                 </div>
             </div>
@@ -141,17 +125,22 @@
                         <a href="mailto:maskedprogrammer.in@gmail.com" title="Email Me">
                             <span class="social-icon">
                                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="social-svg">
-                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
                                     <polyline points="22,6 12,13 2,6"></polyline>
                                 </svg>
                             </span>
                         </a>
                     </div>
                     <div class="social-box social-box2">
-                        <a href="https://www.linkedin.com/in/masked-shinobi-30a289377/" target="_blank" title="LinkedIn">
+                        <a href="https://www.linkedin.com/in/masked-shinobi-30a289377/" target="_blank"
+                            title="LinkedIn">
                             <span class="social-icon">
                                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="social-svg">
-                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                    </path>
                                     <rect x="2" y="9" width="4" height="12"></rect>
                                     <circle cx="4" cy="4" r="2"></circle>
                                 </svg>
@@ -162,7 +151,9 @@
                         <a href="https://github.com/masked-shinobi" target="_blank" title="GitHub">
                             <span class="social-icon">
                                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="social-svg">
-                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                    <path
+                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                    </path>
                                 </svg>
                             </span>
                         </a>
@@ -315,6 +306,20 @@
                 <path d="M3 12h3m12 0h3M12 3v3m0 12v3"></path>
             </svg>
         </button>
+    </div>
+
+    <!-- Intro Pop Screen -->
+    <div id="intro-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal" aria-label="Close Pop Screen">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <iframe id="intro-iframe" src="about:blank" frameborder="0"></iframe>
+        </div>
     </div>
 
     <script type="module" src="script.js"></script>

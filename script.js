@@ -157,43 +157,76 @@ viewport.addEventListener('mousemove', (e) => {
     viewport.style.setProperty('--mouseY', `${y}px`);
 });
 
-// Chat Interaction Logic
+// --- Single-Bubble "Sanjay AI" Logic ---
 const chatInput = document.getElementById('chat-input-field');
-const chatBubbleText = document.getElementById('chat-text');
+const chatBubble = document.getElementById('chat-bubble');
+const chatText = document.getElementById('chat-text');
+const chatCard = document.querySelector('.chat-card');
 
-if (chatInput && chatBubbleText) {
-    // Prevent drag events from firing when interacting with input
-    chatInput.addEventListener('mousedown', (e) => e.stopPropagation());
-    chatInput.addEventListener('touchstart', (e) => e.stopPropagation());
+if (chatInput && chatBubble && chatText) {
+    const resumeContext = `
+        You are the AI double of Sanjay Baskar, a Cloud & Security Developer. 
+        Background: 3rd year CS student at SRM IST Chennai, CGPA 9.88.
+        Skills: Java, C++, Python, TS, React, Next.js, Google Cloud (Kubernetes, BigQuery), AI/ML.
+        Experience: Research Intern at King Faisal Univ, Web Intern at CJ Network, Python Intern at Infosys.
+        Projects: TrashNetX (waste AI), Emotion Recognition.
+    `;
+
+    const typeWriter = (text) => {
+        let i = 0;
+        chatText.textContent = "";
+        const interval = setInterval(() => {
+            chatText.textContent += text.charAt(i);
+            i++;
+            if (i >= text.length) clearInterval(interval);
+        }, 15);
+    };
+
+    const updateBubble = (text) => {
+        // Pop out animation
+        chatBubble.style.opacity = '0';
+        chatBubble.style.transform = 'scale(0.8) translateY(10px)';
+        
+        setTimeout(() => {
+            typeWriter(text);
+            chatBubble.style.opacity = '1';
+            chatBubble.style.transform = 'scale(1) translateY(0)';
+        }, 300);
+    };
+
+    const fetchAIResponse = async (userMsg) => {
+        // Note: Real LLM can be plugged here via Hugging Face/OpenAI
+        const input = userMsg.toLowerCase();
+        if (input.includes("hi") || input.includes("hello")) return "Hey! I'm Sanjay's AI double. Happy to chat about my work, cloud experience, or projects!";
+        if (input.includes("skill") || input.includes("know")) return "I specialize in Cloud (GCP), AI/ML, and Full-stack development with Next.js and TypeScript.";
+        if (input.includes("education") || input.includes("college")) return "I study at SRM IST, Chennai. Current CGPA is 9.88 with a Merit Scholarship.";
+        if (input.includes("intern") || input.includes("work")) return "I've interned at King Faisal University (AI), Infosys (Python), and CJ Network (Web).";
+        if (input.includes("project") || input.includes("build")) return "My key projects include TrashNetX for waste classification and an Emotion Recognition system!";
+        return "That's interesting! I focus on Cloud, Security, and AI. Want to hear about a specific project or my tech stack?";
+    };
+
+    const handleSend = async () => {
+        const val = chatInput.value.trim();
+        if (!val) return;
+
+        chatInput.value = '';
+        chatCard.classList.add('typing');
+        
+        const response = await fetchAIResponse(val);
+
+        setTimeout(() => {
+            chatCard.classList.remove('typing');
+            updateBubble(response);
+        }, 600);
+    };
 
     chatInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault(); // Prevent default if any
-            const userText = chatInput.value.trim();
-            if (userText) {
-                // Simple reactive feedback
-                chatBubbleText.style.opacity = '0';
-                
-                setTimeout(() => {
-                    chatBubbleText.textContent = "That's interesting! Let's explore that further.";
-                    chatBubbleText.style.opacity = '1';
-                    
-                    // Add a little pop animation to the bubble
-                    const bubble = chatBubbleText.parentElement;
-                    bubble.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                    bubble.style.transform = 'scale(1.05)';
-                    setTimeout(() => {
-                        bubble.style.transform = 'scale(1)';
-                    }, 300);
-                }, 200);
-
-                chatInput.value = '';
-            }
-        }
+        if (e.key === 'Enter') handleSend();
     });
-    
-// Smooth transition for bubble text
-    chatBubbleText.style.transition = 'opacity 0.2s ease';
+
+    // Prevent drag events
+    chatInput.addEventListener('mousedown', (e) => e.stopPropagation());
+    chatInput.addEventListener('touchstart', (e) => e.stopPropagation());
 }
 
 /**
@@ -270,3 +303,70 @@ function initializeDraggableStickers() {
 
 // Global initialization call
 initializeDraggableStickers();
+
+// Intro Pop Screen Logic
+const introModal = document.getElementById('intro-modal');
+const introIframe = document.getElementById('intro-iframe');
+const closeIntroBtn = document.getElementById('close-modal');
+const heroSticker = document.querySelector('.hero-sticker-wrapper');
+
+function openIntro() {
+    if (!introModal || !introIframe) return;
+    
+    // Set iframe src only when opening to prevent background loading
+    introIframe.src = 'intro.html';
+    
+    introModal.classList.add('active');
+    
+    // Send theme to iframe once it loads
+    introIframe.onload = () => {
+        const isDark = document.body.classList.contains('dark-mode');
+        introIframe.contentWindow.postMessage({ theme: isDark ? 'dark' : 'light' }, '*');
+    };
+}
+
+function closeIntro() {
+    if (!introModal) return;
+    introModal.classList.remove('active');
+    // Clear src to reset iframe state
+    setTimeout(() => {
+        introIframe.src = 'about:blank';
+    }, 500);
+}
+
+if (heroSticker) {
+    heroSticker.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openIntro();
+    });
+    // Support touch
+    heroSticker.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+        openIntro();
+    });
+    // Prevent dragging when clicking down on hero
+    heroSticker.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+    });
+}
+
+if (closeIntroBtn) {
+    closeIntroBtn.addEventListener('click', closeIntro);
+}
+
+// Close on background click
+if (introModal) {
+    introModal.addEventListener('click', (e) => {
+        if (e.target === introModal) {
+            closeIntro();
+        }
+    });
+}
+
+// Sync theme with iframe when it changes
+themeCheckbox?.addEventListener('change', () => {
+    if (introModal?.classList.contains('active')) {
+        const isDark = document.body.classList.contains('dark-mode');
+        introIframe.contentWindow.postMessage({ theme: isDark ? 'dark' : 'light' }, '*');
+    }
+});
