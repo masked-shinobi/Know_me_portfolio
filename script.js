@@ -315,69 +315,80 @@ function initializeDraggableStickers() {
 // Global initialization call
 initializeDraggableStickers();
 
-// Intro Pop Screen Logic
+// Intro & Projects Pop Screen Logic
 const introModal = document.getElementById('intro-modal');
 const introIframe = document.getElementById('intro-iframe');
 const closeIntroBtn = document.getElementById('close-modal');
 const heroSticker = document.querySelector('.hero-sticker-wrapper');
 
-function openIntro() {
-    if (!introModal || !introIframe) return;
+const projectsModal = document.getElementById('projects-modal');
+const projectsIframe = document.getElementById('projects-iframe');
+const closeProjectsBtn = document.getElementById('close-projects-modal');
+const projectsTrigger = document.getElementById('projects-trigger');
+
+function openModal(modal, iframe, file) {
+    if (!modal || !iframe) return;
+    iframe.src = file;
+    modal.classList.add('active');
     
-    // Set iframe src only when opening to prevent background loading
-    introIframe.src = 'intro.html';
-    
-    introModal.classList.add('active');
-    
-    // Send theme to iframe once it loads
-    introIframe.onload = () => {
+    iframe.onload = () => {
         const isDark = document.body.classList.contains('dark-mode');
-        introIframe.contentWindow.postMessage({ theme: isDark ? 'dark' : 'light' }, '*');
+        iframe.contentWindow.postMessage({ theme: isDark ? 'dark' : 'light' }, '*');
     };
 }
 
-function closeIntro() {
-    if (!introModal) return;
-    introModal.classList.remove('active');
-    // Clear src to reset iframe state
+function closeModal(modal, iframe) {
+    if (!modal) return;
+    modal.classList.remove('active');
     setTimeout(() => {
-        introIframe.src = 'about:blank';
+        iframe.src = 'about:blank';
     }, 500);
 }
 
+// Hero Logo Trigger
 if (heroSticker) {
     heroSticker.addEventListener('click', (e) => {
         e.stopPropagation();
-        openIntro();
+        openModal(introModal, introIframe, 'intro.html');
     });
-    // Support touch
     heroSticker.addEventListener('touchstart', (e) => {
         e.stopPropagation();
-        openIntro();
-    });
-    // Prevent dragging when clicking down on hero
-    heroSticker.addEventListener('mousedown', (e) => {
-        e.stopPropagation();
+        openModal(introModal, introIframe, 'intro.html');
     });
 }
 
-if (closeIntroBtn) {
-    closeIntroBtn.addEventListener('click', closeIntro);
+// Projects Glass Card Trigger
+if (projectsTrigger) {
+    projectsTrigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openModal(projectsModal, projectsIframe, 'projects.html');
+    });
+    projectsTrigger.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+        openModal(projectsModal, projectsIframe, 'projects.html');
+    });
 }
+
+// Close Buttons
+closeIntroBtn?.addEventListener('click', () => closeModal(introModal, introIframe));
+closeProjectsBtn?.addEventListener('click', () => closeModal(projectsModal, projectsIframe));
 
 // Close on background click
-if (introModal) {
-    introModal.addEventListener('click', (e) => {
-        if (e.target === introModal) {
-            closeIntro();
+[introModal, projectsModal].forEach(modal => {
+    modal?.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            const iframe = modal.id === 'intro-modal' ? introIframe : projectsIframe;
+            closeModal(modal, iframe);
         }
     });
-}
+});
 
-// Sync theme with iframe when it changes
+// Sync theme with iframes when it changes
 themeCheckbox?.addEventListener('change', () => {
-    if (introModal?.classList.contains('active')) {
-        const isDark = document.body.classList.contains('dark-mode');
-        introIframe.contentWindow.postMessage({ theme: isDark ? 'dark' : 'light' }, '*');
-    }
+    const isDark = document.body.classList.contains('dark-mode');
+    [introIframe, projectsIframe].forEach(iframe => {
+        if (iframe && iframe.src !== 'about:blank') {
+            iframe.contentWindow.postMessage({ theme: isDark ? 'dark' : 'light' }, '*');
+        }
+    });
 });
