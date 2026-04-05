@@ -737,8 +737,7 @@ body.dark-mode #floating-menu a:hover {
     bottom: 50%;
     transform: translate(50%, 50%);
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    opacity: 0; /* Hidden by default */
-    pointer-events: none;
+    z-index: 10; /* Ensure it stays on top of social boxes */
 }
 
 .social-logo .social-logo-img {
@@ -850,7 +849,6 @@ body.dark-mode #floating-menu a:hover {
     right: 16px;
     bottom: auto;
     opacity: 1;
-    pointer-events: auto;
 }
 
 [data-theme="dark"] .social-box1:hover {
@@ -984,6 +982,17 @@ body.dark-mode .chat-input-field::placeholder { color: rgba(255,255,255,0.3); }
     .chat-input-container { width: 100%; }
 }
 /* --- End Sleek Chat Styles --- */
+.bankai-active {
+    color: #ff3c00 !important;
+    font-weight: 800 !important;
+    text-shadow: 0 0 10px rgba(255, 60, 0, 0.4);
+    animation: fire-flicker 1.5s infinite alternate;
+}
+
+@keyframes fire-flicker {
+    0% { transform: scale(1); filter: brightness(1); }
+    100% { transform: scale(1.02); filter: brightness(1.2); }
+}
 
 
 

@@ -187,7 +187,14 @@ if (chatInput && chatBubble && chatText) {
         chatBubble.style.opacity = '0';
         chatBubble.style.transform = 'scale(0.8) translateY(10px)';
         
+        // Remove Bankai effect by default
+        chatText.classList.remove('bankai-active');
+
         setTimeout(() => {
+            // Apply Bankai styling if it's the specific easter-egg
+            if (text === "Zanka No Tachi !!!") {
+                chatText.classList.add('bankai-active');
+            }
             typeWriter(text);
             chatBubble.style.opacity = '1';
             chatBubble.style.transform = 'scale(1) translateY(0)';
@@ -196,7 +203,11 @@ if (chatInput && chatBubble && chatText) {
 
     const fetchAIResponse = async (userMsg) => {
         // Note: Real LLM can be plugged here via Hugging Face/OpenAI
-        const input = userMsg.toLowerCase();
+        const input = userMsg.toLowerCase().trim();
+        
+        // Easter Egg
+        if (input === "bankai" || input === "/bankai") return "Zanka No Tachi !!!";
+
         if (input.includes("hi") || input.includes("hello")) return "Hey! I'm Sanjay's AI double. Happy to chat about my work, cloud experience, or projects!";
         if (input.includes("skill") || input.includes("know")) return "I specialize in Cloud (GCP), AI/ML, and Full-stack development with Next.js and TypeScript.";
         if (input.includes("education") || input.includes("college")) return "I study at SRM IST, Chennai. Current CGPA is 9.88 with a Merit Scholarship.";
