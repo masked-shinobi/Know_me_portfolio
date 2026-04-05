@@ -383,12 +383,60 @@ closeProjectsBtn?.addEventListener('click', () => closeModal(projectsModal, proj
     });
 });
 
-// Sync theme with iframes when it changes
-themeCheckbox?.addEventListener('change', () => {
-    const isDark = document.body.classList.contains('dark-mode');
-    [introIframe, projectsIframe].forEach(iframe => {
-        if (iframe && iframe.src !== 'about:blank') {
-            iframe.contentWindow.postMessage({ theme: isDark ? 'dark' : 'light' }, '*');
-        }
-    });
+// --- Navigation & Scroll-to-Position Logic ---
+
+/**
+ * Centered scrolling to a point on the stage.
+ * @param {number} x - Target stage X coordinate (relative to stage top-left)
+ * @param {number} y - Target stage Y coordinate (relative to stage top-left)
+ */
+function scrollToPosition(x, y) {
+    // Add smooth transition class
+    stage.classList.add('smooth-reset');
+    
+    // Calculate translate values to center the point (x, y) in the viewport
+    const targetX = (window.innerWidth / 2) - x;
+    const targetY = (window.innerHeight / 2) - y;
+    
+    updateStagePosition(targetX, targetY);
+    
+    // Reset mouse variables for the overlay
+    viewport.style.setProperty('--mouseX', `${window.innerWidth / 2}px`);
+    viewport.style.setProperty('--mouseY', `${window.innerHeight / 2}px`);
+    
+    // Clean up class after animation
+    setTimeout(() => {
+        stage.classList.remove('smooth-reset');
+    }, 800);
+}
+
+// Navbar Listeners
+const navHome = document.getElementById('nav-home');
+const navWork = document.getElementById('nav-work');
+const navAbout = document.getElementById('nav-about');
+const navContact = document.getElementById('nav-contact');
+
+navHome?.addEventListener('click', (e) => {
+    e.preventDefault();
+    scrollToPosition(2000, 1500); // Stage Center / Hero
+});
+
+navWork?.addEventListener('click', (e) => {
+    e.preventDefault();
+    scrollToPosition(1450, 1350); // Card #03 Journey approx center
+});
+
+navAbout?.addEventListener('click', (e) => {
+    e.preventDefault();
+    // 1. Center the view on hero
+    scrollToPosition(2000, 1500);
+    // 2. Open pop-up (About Me)
+    setTimeout(() => {
+        openModal(introModal, introIframe, 'intro.html');
+    }, 400); // Trigger mid-scroll for seamless feel
+});
+
+navContact?.addEventListener('click', (e) => {
+    e.preventDefault();
+    scrollToPosition(1700, 2000); // Card #05 Connect approx center
 });
