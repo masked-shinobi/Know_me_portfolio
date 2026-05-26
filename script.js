@@ -173,16 +173,22 @@ if (chatInput && chatBubble && chatText) {
     `;
 
     const typeWriter = (text) => {
+        const cleaned = text.trim();
         let i = 0;
         chatText.textContent = "";
+        if (chatBubble) chatBubble.scrollTop = 0;
         const interval = setInterval(() => {
-            chatText.textContent += text.charAt(i);
+            chatText.textContent += cleaned.charAt(i);
             i++;
-            if (i >= text.length) clearInterval(interval);
+            if (chatBubble) {
+                chatBubble.scrollTop = chatBubble.scrollHeight;
+            }
+            if (i >= cleaned.length) clearInterval(interval);
         }, 15);
     };
 
     const updateBubble = (text) => {
+        const cleaned = text.trim();
         // Pop out animation
         chatBubble.style.opacity = '0';
         chatBubble.style.transform = 'scale(0.8) translateY(10px)';
@@ -192,10 +198,10 @@ if (chatInput && chatBubble && chatText) {
 
         setTimeout(() => {
             // Apply Bankai styling if it's the specific easter-egg
-            if (text === "Zanka No Tachi !!!") {
+            if (cleaned === "Zanka No Tachi !!!") {
                 chatText.classList.add('bankai-active');
             }
-            typeWriter(text);
+            typeWriter(cleaned);
             chatBubble.style.opacity = '1';
             chatBubble.style.transform = 'scale(1) translateY(0)';
         }, 300);
