@@ -21,6 +21,7 @@ import CharacterCard from './components/cards/CharacterCard';
 import JourneyCard from './components/cards/JourneyCard';
 import ChatCard from './components/cards/ChatCard';
 import SocialCard from './components/cards/SocialCard';
+import WorkspaceCard from './components/cards/WorkspaceCard';
 
 export default function App() {
   const { viewportRef, stageRef, scrollToPosition, recenter } = useStageDrag();
@@ -82,6 +83,7 @@ export default function App() {
             onProjectsClick={() => setProjectsOpen(true)}
             onEducationClick={() => setEducationOpen(true)}
           />
+          <WorkspaceCard />
           <ChatCard />
           <SocialCard />
 
