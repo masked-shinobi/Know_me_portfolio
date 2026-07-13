@@ -47,6 +47,20 @@ export default function WorkspaceCard() {
             title="Sanjay DSA Sheet"
           />
         </div>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=SanjayBaskar.shinobi-black-theme"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="workspace-theme-float"
+          title="Open Shinobi Black Theme in VS Code Marketplace"
+        >
+          <img
+            src="/images/floating-stickers/image.png"
+            alt="Shinobi Black VS Code Theme"
+            className="workspace-theme-image"
+          />
+          <span className="workspace-theme-tag">watch out my new theme</span>
+        </a>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 // Each tech has a name, brand color, and SVG icon path (inline SVGs used in components)
 
 export const techIcons = {
+  vscode: { name: 'VS Code', color: '#007ACC', bg: 'rgba(0,122,204,0.15)' },
   react: { name: 'React', color: '#61DAFB', bg: 'rgba(97,218,251,0.15)' },
   nodejs: { name: 'Node.js', color: '#339933', bg: 'rgba(51,153,51,0.15)' },
   python: { name: 'Python', color: '#3776AB', bg: 'rgba(55,118,171,0.15)' },
@@ -97,6 +98,14 @@ export const projects = [
     stack: ['gsap', 'threejs'],
     description: 'Immersive 3D web experience with GSAP animations',
     github: 'https://github.com/masked-shinobi/GSAP-website-3d',
+  },
+  {
+    id: 'shinobi-black-theme',
+    name: 'Shinobi Black VS Code Theme',
+    category: 'web',
+    stack: ['vscode', 'javascript'],
+    description: 'OLED black VS Code theme with vibrant syntax highlighting',
+    github: 'https://marketplace.visualstudio.com/items?itemName=SanjayBaskar.shinobi-black-theme',
   },
 
   // --- DevOps ---

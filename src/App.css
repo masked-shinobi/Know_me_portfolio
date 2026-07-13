@@ -2716,7 +2716,7 @@ body.dark-mode .education-redirect-btn {
    ========================================================================== */
 .workspace-card-container {
     width: 800px;
-    height: 680px;
+    height: 860px;
     transform: rotate(-3deg);
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
     z-index: 5;
@@ -2852,12 +2852,68 @@ body.dark-mode .workspace-link-btn {
     transform: translate(1px, -1px);
 }
 
+.workspace-theme-float {
+    margin: 18px auto 20px;
+    width: min(430px, calc(100% - 40px));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    animation: workspace-theme-bob 4s ease-in-out infinite;
+}
+
+.workspace-theme-image {
+    width: 100%;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease;
+}
+
+.workspace-theme-float:hover .workspace-theme-image {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.16);
+}
+
+.workspace-theme-tag {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #0b1220;
+    background: linear-gradient(135deg, #40e0ff, #19b7d8);
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+body.dark-mode .workspace-theme-image {
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.45);
+}
+
+body.dark-mode .workspace-theme-tag {
+    color: #011014;
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+@keyframes workspace-theme-bob {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
 /* Responsive workspace card styles */
 @media (max-width: 768px) {
     .workspace-card-container {
         width: 90vw;
         max-width: 550px;
-        height: 520px;
+        height: 700px;
         transform: rotate(0deg) !important;
     }
 }
@@ -2865,7 +2921,7 @@ body.dark-mode .workspace-link-btn {
 @media (max-width: 480px) {
     .workspace-card-container {
         width: calc(100vw - 32px);
-        height: 460px;
+        height: 640px;
     }
     .workspace-card-title {
         font-size: 1.1rem;
@@ -2879,6 +2935,15 @@ body.dark-mode .workspace-link-btn {
     .workspace-card-actions {
         width: 100%;
         justify-content: space-between;
+    }
+    .workspace-theme-float {
+        width: calc(100% - 24px);
+        margin: 14px auto 16px;
+    }
+    .workspace-theme-tag {
+        font-size: 0.66rem;
+        letter-spacing: 0.06em;
+        padding: 7px 10px;
     }
 }
 
