@@ -139,37 +139,73 @@ const techSvgs = {
 
 export default function StackCard() {
   const techKeys = getAllTechKeys();
+  const previewTechKeys = techKeys.slice(0, 4);
 
   return (
     <div className="card-container" style={{ left: '2150px', top: '1100px' }}>
       <span className="card-label">CARD #01 &mdash; STACK</span>
-      <div className="stack-card-modern">
-        <div className="stack-card-header">
-          <h2 className="stack-card-title">Tech Stack</h2>
-          <span className="stack-card-count">{techKeys.length} tools</span>
-        </div>
-        <div className="stack-icon-grid">
-          {techKeys.map((key, i) => {
-            const tech = techIcons[key];
-            if (!tech) return null;
-            return (
-              <div
-                key={key}
-                className="stack-icon-pill"
-                style={{
-                  '--tech-color': tech.color,
-                  '--tech-bg': tech.bg,
-                  animationDelay: `${i * 0.05}s`,
-                }}
-                title={tech.name}
-              >
-                <span className="stack-icon-svg" style={{ color: tech.color }}>
-                  {techSvgs[key] || null}
-                </span>
-                <span className="stack-icon-name">{tech.name}</span>
-              </div>
-            );
-          })}
+      <div className="stack-card-hover-zone">
+        <div className="stack-card-modern">
+          <div className="stack-card-compact">
+            <div className="stack-card-header">
+              <h2 className="stack-card-title">Tech Stack</h2>
+              <span className="stack-card-count">{techKeys.length}</span>
+            </div>
+            <div className="stack-card-preview">
+              {previewTechKeys.map((key, i) => {
+                const tech = techIcons[key];
+                if (!tech) return null;
+
+                return (
+                  <div
+                    key={key}
+                    className="stack-icon-pill stack-icon-pill-preview"
+                    style={{
+                      '--tech-color': tech.color,
+                      '--tech-bg': tech.bg,
+                      animationDelay: `${i * 0.05}s`,
+                    }}
+                    title={tech.name}
+                  >
+                    <span className="stack-icon-svg" style={{ color: tech.color }}>
+                      {techSvgs[key] || null}
+                    </span>
+                    <span className="stack-icon-name">{tech.name}</span>
+                  </div>
+                );
+              })}
+          </div>
+            <p className="stack-card-compact-text">Hover to reveal all tools</p>
+          </div>
+          <div className="stack-card-body">
+            <div className="stack-card-header">
+              <h2 className="stack-card-title">Tech Stack</h2>
+              <span className="stack-card-count">{techKeys.length} tools</span>
+            </div>
+            <div className="stack-icon-grid">
+              {techKeys.map((key, i) => {
+                const tech = techIcons[key];
+                if (!tech) return null;
+                return (
+                  <div
+                    key={key}
+                    className="stack-icon-pill"
+                    style={{
+                      '--tech-color': tech.color,
+                      '--tech-bg': tech.bg,
+                      animationDelay: `${i * 0.05}s`,
+                    }}
+                    title={tech.name}
+                  >
+                    <span className="stack-icon-svg" style={{ color: tech.color }}>
+                      {techSvgs[key] || null}
+                    </span>
+                    <span className="stack-icon-name">{tech.name}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -565,11 +565,8 @@ body.dark-mode #hint {
     opacity: 0;
     visibility: hidden;
 }
-
-#recenter-btn {
-    position: fixed;
-    bottom: 40px;
-    left: 40px;
+#recenter-btn,
+#dsa-sheet-btn {
     width: 48px;
     height: 48px;
     background: rgba(255, 255, 255, 0.1);
@@ -587,7 +584,19 @@ body.dark-mode #hint {
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-body.dark-mode #recenter-btn {
+.bottom-left-actions {
+    position: fixed;
+    left: 40px;
+    bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1000;
+    pointer-events: auto;
+}
+
+body.dark-mode #recenter-btn,
+body.dark-mode #dsa-sheet-btn {
     background: rgba(255, 255, 255, 0.05);
 }
 
@@ -597,7 +606,17 @@ body.dark-mode #recenter-btn {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
+#dsa-sheet-btn:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
 #recenter-btn:active {
+    transform: scale(0.95);
+}
+
+#dsa-sheet-btn:active {
     transform: scale(0.95);
 }
 
@@ -696,9 +715,14 @@ body.dark-mode #floating-menu a:hover {
     }
 
     /* UI Position adjustments */
-    #recenter-btn {
-        bottom: 24px;
+    .bottom-left-actions {
         left: 24px;
+        bottom: 24px;
+        gap: 10px;
+    }
+
+    #recenter-btn,
+    #dsa-sheet-btn {
         width: 44px;
         height: 44px;
     }
@@ -1555,14 +1579,26 @@ body.dark-mode .cta-btn {
    STACK CARD MODERN — Tech Icon Grid
    ========================================================================== */
 
+.stack-card-hover-zone {
+    display: inline-block;
+    padding: 5px 0;
+    margin: -5px 0;
+    pointer-events: auto;
+}
+
 .stack-card-modern {
-    width: 260px;
+    width: 176px;
+    min-height: 122px;
     background: var(--card-bg);
     border: var(--border);
     border-radius: 24px;
-    padding: 24px;
+    padding: 18px;
     box-shadow: var(--shadow);
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: width 0.55s cubic-bezier(0.23, 1, 0.32, 1),
+        min-height 0.55s cubic-bezier(0.23, 1, 0.32, 1),
+        padding 0.55s cubic-bezier(0.23, 1, 0.32, 1),
+        box-shadow 0.55s cubic-bezier(0.23, 1, 0.32, 1),
+        transform 0.55s cubic-bezier(0.23, 1, 0.32, 1);
     position: relative;
     overflow: hidden;
 }
@@ -1578,9 +1614,70 @@ body.dark-mode .cta-btn {
     pointer-events: none;
 }
 
-.stack-card-modern:hover {
+.stack-card-hover-zone:hover .stack-card-modern,
+.stack-card-hover-zone:focus-within .stack-card-modern {
+    width: 260px;
+    min-height: 0;
+    padding: 24px;
     transform: translateY(-5px);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.stack-card-compact,
+.stack-card-body {
+    transition: opacity 0.35s ease, transform 0.55s cubic-bezier(0.23, 1, 0.32, 1), max-height 0.55s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.stack-card-compact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    min-height: 100%;
+}
+
+.stack-card-compact-text {
+    font-size: 0.68rem;
+    line-height: 1.2;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.stack-card-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    max-height: 58px;
+    overflow: hidden;
+}
+
+.stack-icon-pill-preview {
+    max-width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.stack-card-body {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+}
+
+.stack-card-hover-zone:hover .stack-card-compact,
+.stack-card-hover-zone:focus-within .stack-card-compact {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.stack-card-hover-zone:hover .stack-card-body,
+.stack-card-hover-zone:focus-within .stack-card-body {
+    max-height: 900px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
 .stack-card-header {
@@ -1588,6 +1685,10 @@ body.dark-mode .cta-btn {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 18px;
+}
+
+.stack-card-compact .stack-card-header {
+    margin-bottom: 0;
 }
 
 .stack-card-title {

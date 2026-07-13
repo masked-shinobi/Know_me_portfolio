@@ -8,6 +8,7 @@ import HeroSection from './components/HeroSection';
 import Navbar from './components/Navbar';
 import FloatingMenu from './components/FloatingMenu';
 import RecenterButton from './components/RecenterButton';
+import DsaSheetButton from './components/DsaSheetButton';
 import DragHint from './components/DragHint';
 import FloatingSticker from './components/FloatingSticker';
 import Modal from './components/Modal';
@@ -112,7 +113,10 @@ export default function App() {
         <Navbar onNavigate={handleNavigate} />
         <DragHint />
         <FloatingMenu onNavigate={handleNavigate} />
-        <RecenterButton onRecenter={recenter} />
+        <div className="bottom-left-actions">
+          <RecenterButton onRecenter={recenter} />
+          <DsaSheetButton />
+        </div>
       </div>
 
       {/* Intro Modal */}
